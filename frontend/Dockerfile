@@ -9,8 +9,9 @@ FROM node:alpine
 # RUN npm config set unsafe-perm true
 # COPY . ./
 # EXPOSE 3000
-
-WORKDIR /app
+USER node
+WORKDIR /home/node
+# WORKDIR /app
 # ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 RUN npm install
@@ -23,3 +24,6 @@ CMD ["npm", "start"]
 
 # docker build -t instagram/frontend . 
 # docker run -p 3000:3000 -v $(pwd):/app -v app/node_modules instagram/frontend
+
+# docker build -t instagram/frontend . 
+# docker run -p 3000:3000 -v $(pwd):/home/node -v /home/node/node_modules instagram/frontend
