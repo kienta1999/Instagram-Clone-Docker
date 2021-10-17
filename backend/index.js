@@ -3,7 +3,7 @@ const app = express();
 const port = 3001;
 
 app.get("/", (req, res) => {
-  res.json({ app: "goodWatch" });
+  res.json({ app: "instagram" });
 });
 
 app.listen(port, () => {
