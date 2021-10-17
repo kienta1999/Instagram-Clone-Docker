@@ -1,22 +1,13 @@
 FROM node:alpine
-# USER node
-# ARG HOME=/home/node
-# ENV NPM_CONFIG_PREFIX=$HOME/.npm-global
-# ENV PATH=$PATH:$HOME/.npm-global/bin
-# WORKDIR /home/node
-# COPY --chown=node:node ./package.json ./
-# RUN npm install
-# RUN npm config set unsafe-perm true
-# COPY . ./
-# EXPOSE 3000
 USER node
+RUN mkdir -p /home/node
 WORKDIR /home/node
 # WORKDIR /app
 # ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json ./
+COPY --chown=node:node package.json ./
 RUN npm install
 RUN npm config set unsafe-perm=true
-COPY . ./
+COPY --chown=node:node . ./
 EXPOSE 3000
 
 # start app

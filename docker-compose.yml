@@ -15,8 +15,8 @@ services:
     container_name: backend
     build: "./backend"
     volumes:
-      - "/app/node_modules"
-      - "./backend:/app"
+      - "/home/node/node_modules"
+      - "./backend:/home/node"
     ports:
       - "3001:3001"
   # db:
