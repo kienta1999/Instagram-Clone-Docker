@@ -19,10 +19,15 @@ services:
       - "./backend:/home/node"
     ports:
       - "3001:3001"
-  # db:
-  #   image: mysql
-  #   restart: always
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: my-secret-pw
-  #   ports:
-  #     - "3306:3306"
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: "instagram"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"

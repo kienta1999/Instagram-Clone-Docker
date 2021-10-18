@@ -1,5 +1,4 @@
 FROM node:alpine
-USER node
 RUN mkdir -p /home/node
 WORKDIR /home/node
 # WORKDIR /app
@@ -7,10 +6,12 @@ WORKDIR /home/node
 COPY --chown=node:node package.json ./
 RUN npm install
 RUN npm config set unsafe-perm=true
+RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
 COPY --chown=node:node . ./
 EXPOSE 3000
 
 # start app
+USER node
 CMD ["npm", "start"]
 
 # docker build -t instagram/frontend . 
