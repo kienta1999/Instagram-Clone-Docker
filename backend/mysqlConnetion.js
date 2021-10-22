@@ -1,12 +1,12 @@
 const mysql = require("mysql2");
 const { promisify } = require("util");
+require("dotenv").config();
 
 mysql
   .createConnection({
-    host: "db",
-    user: "user",
-    password: "password",
-    //   database: "instagram",
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PSW,
   })
   .connect((err) => {
     if (err) throw err;
@@ -21,9 +21,9 @@ mysql
   });
 
 const conn = mysql.createConnection({
-  host: "db",
-  user: "user",
-  password: "password",
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USERNAME,
+  password: process.env.MYSQL_PSW,
   database: "instagram",
 });
 conn.query(

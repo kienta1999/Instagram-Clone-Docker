@@ -1,9 +1,10 @@
 const express = require("express");
-const app = express();
-const port = 3001;
 const cors = require("cors");
 const userRouter = require("./route/userRoute.js");
 const debugRouter = require("./middleware/debugRouter.js");
+require("dotenv").config();
+const app = express();
+const port = process.env.PORT;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
