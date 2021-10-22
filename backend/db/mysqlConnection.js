@@ -2,24 +2,6 @@ const mysql = require("mysql2");
 const { promisify } = require("util");
 require("dotenv").config();
 
-mysql
-  .createConnection({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USERNAME,
-    password: process.env.MYSQL_PSW,
-  })
-  .connect((err) => {
-    if (err) throw err;
-    console.log("Connected to the MySql DB");
-    conn.query(
-      "CREATE DATABASE IF NOT EXISTS instagram",
-      function (err, result) {
-        if (err) throw err;
-        console.log("Database instagram created");
-      }
-    );
-  });
-
 const conn = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USERNAME,

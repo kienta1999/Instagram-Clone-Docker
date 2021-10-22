@@ -1,4 +1,4 @@
-const { conn, query } = require("../mysqlConnetion");
+const { conn, query } = require("../db/mysqlConnection");
 
 class User {
   constructor(id) {

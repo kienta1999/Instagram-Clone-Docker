@@ -5,6 +5,7 @@ const debugRouter = require("./middleware/debugRouter.js");
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
+require("./db/mysqlInit.js");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -19,4 +20,5 @@ app.use("/api", userRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
+  //   initDb();
 });
