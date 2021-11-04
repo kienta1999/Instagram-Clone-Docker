@@ -8,7 +8,7 @@ const register = async (username, password) => {
   };
 
   const { backendHost } = keys;
-  const url = `http://localhost:3001/api/user`;
+  const url = `${backendHost}/api/user`;
   const response = await axios.post(url, { username, password }, axiosConfig);
   console.log(response);
 };
