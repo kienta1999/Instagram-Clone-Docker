@@ -5,11 +5,11 @@ const debugRouter = require("./middleware/debugRouter.js");
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
-require("./db/mysqlInit.js");
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+require("./db/mysqlInit.js");
 
 app.get("/", (req, res) => {
   res.json({ app: "instagram :) :)" });
@@ -20,5 +20,4 @@ app.use("/api", userRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
-  //   initDb();
 });
