@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { addUser, User } = require("../model/user.js");
+const { createUser } = require("./../service/userService");
+const { usernameExisted } = require("./../service/errors.js");
 
 router.use("/user/:id", (req, res, next) => {
   console.log(`User id: ${req.params.id}`);
@@ -9,23 +10,21 @@ router.use("/user/:id", (req, res, next) => {
 
 router.get("/user/:id", async (req, res, next) => {
   const id = req.params.id;
-  const user = new User(id);
-  try {
-    const userInfor = await user.getUser();
-    res.json(userInfor);
-  } catch (error) {
-    res.json(error);
-  }
+  res.send(`User id: ${id}`);
 });
 
 router.post("/user", async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
   try {
-    await addUser(username, password);
+    await createUser(username, password, email);
+    res.status(200).json({ success: true });
   } catch (error) {
-    res.json(error);
+    if (error == usernameExisted) {
+      res.status(400).json({ success: false, message: usernameExisted });
+    } else {
+      res.status(500).json({ success: false, error: error.message });
+    }
   }
-  res.json({ username, password });
 });
 
 module.exports = router;

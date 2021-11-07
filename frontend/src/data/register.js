@@ -1,7 +1,7 @@
 import keys from "../keys";
 import axios from "axios";
 
-const register = async (username, password) => {
+const register = async (username, password, email) => {
   let axiosConfig = {
     withCredentials: false,
     headers: { "Content-Type": "application/json" },
@@ -9,7 +9,11 @@ const register = async (username, password) => {
 
   const { backendHost } = keys;
   const url = `${backendHost}/api/user`;
-  const response = await axios.post(url, { username, password }, axiosConfig);
+  const response = await axios.post(
+    url,
+    { username, password, email },
+    axiosConfig
+  );
   console.log(response);
 };
 

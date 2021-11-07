@@ -4,11 +4,15 @@ import { useRef, useEffect } from "react";
 const Register = () => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
+  const emailRef = useRef(null);
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    console.log(event.target);
-    await register(usernameRef.current.value, passwordRef.current.value);
+    await register(
+      usernameRef.current.value,
+      passwordRef.current.value,
+      emailRef.current.value
+    );
   };
 
   return (
@@ -16,7 +20,7 @@ const Register = () => {
       <h2 id="headerTitle">Register</h2>
       <div className="row">
         <label>Email</label>
-        <input type="email" placeholder="Enter your email" />
+        <input type="email" placeholder="Enter your email" ref={emailRef} />
       </div>
       <div className="row">
         <label>Username</label>

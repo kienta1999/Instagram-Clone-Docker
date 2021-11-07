@@ -1,32 +1,17 @@
-const { conn, query } = require("../db/mysqlConnection");
+module.exports = (sequelize, Sequelize) => {
+  const User = sequelize.define("user", {
+    username: {
+      type: Sequelize.STRING,
+    },
 
-class User {
-  constructor(id) {
-    this.id = id;
-    this.conn = conn;
-  }
-  async getUser() {
-    const sql = "SELECT * FROM users WHERE id = ?";
-    try {
-      const userInfor = await query(sql, [this.id]);
-      if (userInfor.length === 0) {
-        throw { id: this.id, error: "user id not exist" };
-      }
-      return userInfor[0];
-    } catch (error) {
-      throw error;
-    }
-  }
-}
+    password: {
+      type: Sequelize.STRING,
+    },
 
-const addUser = async (username, password) => {
-  console.log({ username, password });
-  let sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-  try {
-    return await query(sql, [username, password]);
-  } catch (error) {
-    throw error;
-  }
+    email: {
+      type: Sequelize.STRING,
+    },
+  });
+
+  return User;
 };
-
-module.exports = { addUser, User };
