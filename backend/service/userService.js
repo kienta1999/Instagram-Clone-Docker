@@ -1,5 +1,5 @@
 const db = require("../db/db.js");
-const { usernameExisted } = require("./errors.js");
+const { usernameExisted, wrongUserInfor } = require("./errors.js");
 const User = db.users;
 
 const createUser = async (username, password, email) => {
@@ -15,4 +15,16 @@ const createUser = async (username, password, email) => {
   }
 };
 
-module.exports = { createUser };
+const loginUser = async (username, password) => {
+  try {
+    const user = await User.findOne({ where: { username, password } });
+    if (!user) {
+      throw wrongUserInfor;
+    }
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { createUser, loginUser };

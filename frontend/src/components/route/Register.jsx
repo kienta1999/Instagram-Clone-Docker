@@ -17,7 +17,7 @@ const Register = () => {
         emailRef.current.value
       );
       setMessage({
-        msg: "Register Successful!",
+        msg: "Register Successful! You should be able to login now",
         color: "green",
       });
     } catch (error) {
