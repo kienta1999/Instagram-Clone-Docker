@@ -11,6 +11,7 @@ const NewPost = () => {
       const content = contentRef.current.value;
       const userId = token?.id;
       await newPost(userId, content);
+      contentRef.current.value = null;
     } else {
       alert("Please login to post!!");
     }

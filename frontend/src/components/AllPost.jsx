@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { listAllPost } from "./../data/post.js";
-import getUser from "../data/getUser";
+import Post from "./Post.jsx";
 
 const AllPost = () => {
   const [listData, setListData] = useState(null);
@@ -11,7 +11,7 @@ const AllPost = () => {
     })();
   }, []);
 
-  return <>{JSON.stringify(listData)}</>;
+  return listData && listData.map((data) => <Post data={data} key={data.id} />);
 };
 
 export default AllPost;
