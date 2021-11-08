@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/route/Login.jsx";
 import Register from "./components/route/Register.jsx";
 import Home from "./components/route/Home.jsx";
