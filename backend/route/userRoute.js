@@ -3,15 +3,10 @@ const router = express.Router();
 const { createUser, loginUser } = require("./../service/userService");
 const { usernameExisted, wrongUserInfor } = require("./../service/errors.js");
 
-router.use("/user/:id", (req, res, next) => {
-  console.log(`User id: ${req.params.id}`);
-  next();
-});
-
-router.get("/user/:id", async (req, res, next) => {
-  const id = req.params.id;
-  res.send(`User id: ${id}`);
-});
+// router.use("/user/:id", (req, res, next) => {
+//   console.log(`User id: ${req.params.id}`);
+//   next();
+// });
 
 router.post("/register", async (req, res, next) => {
   const { username, password, email } = req.body;

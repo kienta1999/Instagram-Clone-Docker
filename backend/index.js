@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const userRouter = require("./route/userRoute.js");
+const postRouter = require("./route/postRoute.js");
 const debugRouter = require("./middleware/debugRouter.js");
 require("dotenv").config();
 const db = require("./db/db.js");
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", debugRouter);
 app.use("/api", userRouter);
+app.use("/api", postRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
