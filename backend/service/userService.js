@@ -27,4 +27,12 @@ const loginUser = async (username, password) => {
   }
 };
 
-module.exports = { createUser, loginUser };
+const getUser = async (id) => {
+  try {
+    return await User.findByPk(id);
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { createUser, loginUser, getUser };

@@ -1,12 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const { createUser, loginUser } = require("./../service/userService");
+const { createUser, loginUser, getUser } = require("./../service/userService");
 const { usernameExisted, wrongUserInfor } = require("./../service/errors.js");
 
 // router.use("/user/:id", (req, res, next) => {
 //   console.log(`User id: ${req.params.id}`);
 //   next();
 // });
+
+router.get("/user/:id", async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const user = await getUser(id);
+    res.json(user);
+  } catch (error) {}
+});
 
 router.post("/register", async (req, res, next) => {
   const { username, password, email } = req.body;

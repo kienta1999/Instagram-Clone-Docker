@@ -1,6 +1,7 @@
 const db = require("../db/db.js");
 const Post = db.posts;
 const { somethingWrong } = require("./errors");
+const { getUser } = require("./userService");
 
 const createPost = async (userId, content) => {
   try {
@@ -12,7 +13,10 @@ const createPost = async (userId, content) => {
 
 const getAllPost = async () => {
   try {
-    return await Post.findAll();
+    const posts = (await Post.findAll({ include: "user" })).map(
+      (d) => d["dataValues"]
+    );
+    return posts;
   } catch (error) {
     throw error?.message || { error: somethingWrong };
   }

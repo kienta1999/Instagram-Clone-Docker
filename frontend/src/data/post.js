@@ -10,3 +10,9 @@ export const newPost = async (userId, content) => {
   };
   return await axios.post(url, { userId, content }, axiosConfig);
 };
+
+export const listAllPost = async () => {
+  const { backendHost } = keys;
+  const url = `${backendHost}/api/posts`;
+  return await axios.get(url);
+};
