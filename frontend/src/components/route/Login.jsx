@@ -1,10 +1,17 @@
 import login from "../../data/login";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
 const Login = () => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [message, setMessage] = useState(null);
+  const { getToken, setToken } = useContext(UserContext);
+  const history = useHistory();
+  if (getToken()) {
+    history.push("/");
+  }
 
   const handleLogin = async () => {
     const username = usernameRef.current.value;
@@ -13,7 +20,8 @@ const Login = () => {
     try {
       const response = await login(username, password);
       setMessage(null);
-      console.log(response.data);
+      setToken(response.data);
+      history.push("/");
     } catch (error) {
       setMessage(error.response.data.message);
     }
