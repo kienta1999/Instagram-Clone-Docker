@@ -12,8 +12,9 @@ import {
 import UserContext from "../context/UserContext";
 
 const NavigationBar = () => {
-  const { deleteToken } = useContext(UserContext);
+  const { getToken, deleteToken } = useContext(UserContext);
   const history = useHistory();
+  const token = getToken();
 
   return (
     <>
@@ -41,6 +42,9 @@ const NavigationBar = () => {
             >
               Logout
             </Button>
+          </Nav>
+          <Nav>
+            <div>{`Welcome back, ${token?.username}!`}</div>
           </Nav>
         </Container>
       </Navbar>

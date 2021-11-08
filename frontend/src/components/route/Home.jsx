@@ -15,7 +15,6 @@ const Home = () => {
     return (
       <Container>
         <NavigationBar />
-        <div>{token?.username}</div>
       </Container>
     );
   }
