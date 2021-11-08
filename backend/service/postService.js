@@ -18,4 +18,12 @@ const getAllPost = async () => {
   }
 };
 
-module.exports = { createPost, getAllPost };
+const getAllUserPost = async (userId) => {
+  try {
+    return await Post.findAll({ where: { userId } });
+  } catch (error) {
+    throw error?.message || { error: somethingWrong };
+  }
+};
+
+module.exports = { createPost, getAllPost, getAllUserPost };
