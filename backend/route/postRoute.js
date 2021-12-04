@@ -5,6 +5,7 @@ const {
   getAllPost,
   getAllUserPost,
   updatePost,
+  deletePost,
 } = require("../service/postService");
 
 router.post("/post", async (req, res, next) => {
@@ -43,7 +44,17 @@ router.put("/user/:userId/post/:postId", async (req, res, next) => {
     const status = await updatePost(postId, userId, content);
     res.status(200).json(status);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json({ message: error });
+  }
+});
+
+router.delete("/user/:userId/post/:postId", async (req, res, next) => {
+  const { userId, postId } = req.params;
+  try {
+    const status = await deletePost(postId, userId);
+    res.status(200).json(status);
+  } catch (error) {
+    res.status(500).json({ message: error });
   }
 });
 

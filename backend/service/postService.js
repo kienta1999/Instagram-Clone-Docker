@@ -48,4 +48,28 @@ const updatePost = async (postId, userId, content) => {
   }
 };
 
-module.exports = { createPost, getAllPost, getAllUserPost, updatePost };
+const deletePost = async (postId, userId) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: postId },
+    });
+    if (!post) {
+      throw { message: "Post not found" };
+    }
+    if (post.userId == userId) {
+      await Post.destroy({ where: { id: postId } });
+      return { success: true };
+    }
+    throw { message: "You are not authorized to delete this post" };
+  } catch (error) {
+    throw error?.message || somethingWrong;
+  }
+};
+
+module.exports = {
+  createPost,
+  getAllPost,
+  getAllUserPost,
+  updatePost,
+  deletePost,
+};
