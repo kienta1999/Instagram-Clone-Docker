@@ -16,3 +16,9 @@ export const listAllPost = async () => {
   const url = `${backendHost}/api/posts`;
   return await axios.get(url);
 };
+
+export const deletePost = async (userId, postId) => {
+  const { backendHost } = keys;
+  const url = `${backendHost}/api/user/${userId}/post/${postId}`;
+  return await axios.delete(url);
+};
