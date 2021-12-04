@@ -43,7 +43,7 @@ const EditPost = () => {
     <Container>
       <NavigationBar />
       <div>Editting Post {postId}</div>
-      <textarea value={content} onChange={updateContent}></textarea>
+      <textarea value={content} onChange={updateContent} cols="100"></textarea>
       <br />
       <button className="btn btn-primary" onClick={submitUpdate}>
         Update
