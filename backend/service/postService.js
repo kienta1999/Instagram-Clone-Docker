@@ -66,10 +66,25 @@ const deletePost = async (postId, userId) => {
   }
 };
 
+const getPost = async (postId, userId) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: postId, userId },
+    });
+    if (!post) {
+      throw { message: "Post not found" };
+    }
+    return post;
+  } catch (error) {
+    throw error?.message || somethingWrong;
+  }
+};
+
 module.exports = {
   createPost,
   getAllPost,
   getAllUserPost,
   updatePost,
   deletePost,
+  getPost,
 };

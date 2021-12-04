@@ -6,8 +6,10 @@ const {
   getAllUserPost,
   updatePost,
   deletePost,
+  getPost,
 } = require("../service/postService");
 
+// add new post
 router.post("/post", async (req, res, next) => {
   const { userId, content } = req.body;
   try {
@@ -18,6 +20,7 @@ router.post("/post", async (req, res, next) => {
   }
 });
 
+// get all posts
 router.get("/posts", async (req, res, next) => {
   try {
     const posts = await getAllPost();
@@ -27,6 +30,7 @@ router.get("/posts", async (req, res, next) => {
   }
 });
 
+// get all post of specific user
 router.get("/user/:id/posts", async (req, res, next) => {
   try {
     const userId = req.params.id;
@@ -37,6 +41,7 @@ router.get("/user/:id/posts", async (req, res, next) => {
   }
 });
 
+// update a post content
 router.put("/user/:userId/post/:postId", async (req, res, next) => {
   const { userId, postId } = req.params;
   const { content } = req.body;
@@ -48,11 +53,23 @@ router.put("/user/:userId/post/:postId", async (req, res, next) => {
   }
 });
 
+// delete a post
 router.delete("/user/:userId/post/:postId", async (req, res, next) => {
   const { userId, postId } = req.params;
   try {
     const status = await deletePost(postId, userId);
     res.status(200).json(status);
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+});
+
+// get a specific post
+router.get("/user/:userId/post/:postId", async (req, res, next) => {
+  const { userId, postId } = req.params;
+  try {
+    const post = await getPost(postId, userId);
+    res.status(200).json(post);
   } catch (error) {
     res.status(500).json({ message: error });
   }
