@@ -30,4 +30,22 @@ const getAllUserPost = async (userId) => {
   }
 };
 
-module.exports = { createPost, getAllPost, getAllUserPost };
+const updatePost = async (postId, userId, content) => {
+  try {
+    const post = await Post.findOne({
+      where: { id: postId },
+    });
+    if (!post) {
+      throw { message: "Post not found" };
+    }
+    if (post.userId == userId) {
+      await Post.update({ content }, { where: { id: postId } });
+      return { success: true };
+    }
+    throw { message: "You are not authorized to update this post" };
+  } catch (error) {
+    throw error?.message || somethingWrong;
+  }
+};
+
+module.exports = { createPost, getAllPost, getAllUserPost, updatePost };

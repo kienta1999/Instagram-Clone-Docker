@@ -6,6 +6,7 @@ import Register from "./components/route/Register.jsx";
 import Home from "./components/route/Home.jsx";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserContext from "./context/UserContext";
+import EditPost from "./components/route/EditPost.jsx";
 
 function App() {
   const setToken = (userToken) => {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/" exact component={Home} />
+          <Route path="/post/:id" exact component={EditPost} />
         </Switch>
       </Router>
     </UserContext.Provider>
